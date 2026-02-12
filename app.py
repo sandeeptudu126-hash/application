@@ -69,7 +69,7 @@ class LoginForm(FlaskForm):
 
 @app.route('/')
 def home():
-    return render_template("welcome.html")
+    return render_template("index.html")
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
@@ -81,7 +81,7 @@ def signup():
         existing_user = User.query.filter_by(username=form.username.data).first()
         if existing_user:
             flash("Username already exists!")
-            return redirect(url_for('signup'))
+            return redirect("signup.html")
 
         # Hash password
         hashed_password = generate_password_hash(form.password.data)
@@ -96,7 +96,7 @@ def signup():
         db.session.commit()
 
         flash("Account created successfully! Please login.")
-        return redirect(url_for('login'))
+        return redirect("login.html")
 
     return render_template("signup.html", form=form)
 
@@ -109,7 +109,7 @@ def login():
 
         if user and check_password_hash(user.password, form.password.data):
             login_user(user)
-            return redirect(url_for('dashboard'))
+            return redirect("dashboard.html")
         else:
             flash("Invalid username or password")
 
@@ -125,7 +125,7 @@ def dashboard():
 def logout():
     logout_user()
     flash("Logged out successfully")
-    return redirect(url_for('home'))
+    return redirect('home')
 
 # -----------------------
 # Run Application
@@ -134,3 +134,4 @@ if __name__ == "__main__":
     with app.app_context():
         db.create_all()
     app.run(debug=False)
+
