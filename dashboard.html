@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Secure Dashboard</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+    display: flex;
+    height: 100vh;
+    background: #0f111a;
+    color: white;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 220px;
+    background: #161923;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    border-right: 2px solid #1f2433;
+}
+
+.sidebar h2 {
+    text-align: center;
+    margin-bottom: 40px;
+    color: #00f7ff;
+}
+
+.sidebar a {
+    text-decoration: none;
+    color: #aaa;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    transition: 0.3s;
+}
+
+.sidebar a:hover {
+    background: linear-gradient(45deg, #00f7ff, #ff00c8);
+    color: white;
+}
+
+/* Main Content */
+.main {
+    flex: 1;
+    padding: 30px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+.header h1 {
+    color: #00f7ff;
+}
+
+.card {
+    background: #161923;
+    padding: 20px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="sidebar">
+    <h2>⚡ DASH</h2>
+    <a href="#">🏠 Home</a>
+    <a href="#">📊 Analytics</a>
+    <a href="#">👤 Profile</a>
+    <a href="#">⚙ Settings</a>
+    <a href="{{ url_for('logout') }}">🚪 Logout</a>
+</div>
+
+<div class="main">
+    <div class="header">
+        <h1>Welcome Back, {{ current_user.username }} 👋</h1>
+        <div>🔔 Notifications</div>
+    </div>
+
+    <div class="card">
+        <h3>Account Information</h3>
+        <p>Email: {{ current_user.email }}</p>
+        <p>User ID: {{ current_user.id }}</p>
+    </div>
+
+    <div class="card">
+        <h3>Security Status</h3>
+        <p>✔ Logged in securely</p>
+        <p>✔ Session protected</p>
+        <p>✔ CSRF Enabled</p>
+        <p>✔ Password Hashed</p>
+    </div>
+
+</div>
+
+</body>
+</html>
